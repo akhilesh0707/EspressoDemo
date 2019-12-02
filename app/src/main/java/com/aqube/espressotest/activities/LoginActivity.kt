@@ -30,8 +30,8 @@ class LoginActivity : AppCompatActivity(), OnClickListener {
 
     private fun login() {
         // Reset errors.
-        editTextEmail.error=null
-        editTextPassword.error=null
+        editTextEmail.error = null
+        editTextPassword.error = null
 
         // Store values at the time of the login attempt.
         val email = editTextEmail.text.toString()
@@ -42,18 +42,18 @@ class LoginActivity : AppCompatActivity(), OnClickListener {
 
         // Check for a valid email address.
         if (TextUtils.isEmpty(email)) {
-            editTextEmail.error =getString(R.string.error_field_required)
+            editTextEmail.error = getString(R.string.error_field_required)
             focusView = editTextEmail
             cancel = true
         } else if (!isEmailValid(email)) {
-            editTextEmail.error=getString(R.string.error_invalid_email)
+            editTextEmail.error = getString(R.string.error_invalid_email)
             focusView = editTextEmail
             cancel = true
         }
 
         // Check for a valid password.
         if (TextUtils.isEmpty(password)) {
-            editTextPassword.error =getString(R.string.error_field_required)
+            editTextPassword.error = getString(R.string.error_field_required)
             focusView = editTextPassword
             cancel = true
         } else if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
@@ -72,14 +72,28 @@ class LoginActivity : AppCompatActivity(), OnClickListener {
         }
     }
 
+    /**
+     * Validate email
+     * @param email : String
+     * @return boolean : return email is valid or invalid
+     */
     private fun isEmailValid(email: String): Boolean {
         return Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 
+    /**
+     * Validate valid password based on password length
+     * @param password : String
+     * @return boolean : return password is valid or invalid
+     */
     private fun isPasswordValid(password: String): Boolean {
         return password.length > 4
     }
 
+    /**
+     * Login Successfully and redirecting to next screen (MainActivity)
+     * @param email : logged in email
+     */
     private fun loginSuccessfully(email: String) {
         val intent = Intent(this@LoginActivity, MainActivity::class.java)
         intent.putExtra("email", email)

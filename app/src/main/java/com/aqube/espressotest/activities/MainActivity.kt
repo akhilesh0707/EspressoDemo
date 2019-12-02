@@ -17,42 +17,56 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        bindLoggedInUser()
+
+        bindRecyclerView()
+    }
+
+    /**
+     * Binding user email
+     */
+    private fun bindLoggedInUser() {
         val welcomeMessage = String.format("Hi %s!", intent.getStringExtra("email")!!)
         textViewWelcome.text = welcomeMessage
+    }
 
-
-        val recyclerView = findViewById(R.id.recyclerView) as RecyclerView
-
-        //adding a layoutmanager
+    /**
+     * Binding RecyclerView with dummy data
+     */
+    private fun bindRecyclerView() {
+        //Adding a LayoutManager
         recyclerView.layoutManager = LinearLayoutManager(this, VERTICAL, false)
-
-
-        //crating an arraylist to store users using the data class user
-        val users = ArrayList<User>()
-
-        //adding some dummy data to the list
-        users.add(User("Belal Khan", "Ranchi Jharkhand"))
-        users.add(User("Ramiz Khan", "Ranchi Jharkhand"))
-        users.add(User("Faiz Khan", "Ranchi Jharkhand"))
-        users.add(User("Yashar Khan", "Ranchi Jharkhand"))
-        users.add(User("Belal Khan", "Ranchi Jharkhand"))
-        users.add(User("Ramiz Khan", "Ranchi Jharkhand"))
-        users.add(User("Faiz Khan", "Ranchi Jharkhand"))
-        users.add(User("Yashar Khan", "Ranchi Jharkhand"))
-        users.add(User("Belal Khan", "Ranchi Jharkhand"))
-        users.add(User("Ramiz Khan", "Ranchi Jharkhand"))
-        users.add(User("Faiz Khan", "Ranchi Jharkhand"))
-        users.add(User("Yashar Khan", "Ranchi Jharkhand"))
-        users.add(User("Belal Khan", "Ranchi Jharkhand"))
-        users.add(User("Ramiz Khan", "Ranchi Jharkhand"))
-        users.add(User("Faiz Khan", "Ranchi Jharkhand"))
-        users.add(User("Yashar Khan", "Ranchi Jharkhand"))
-
+        //Crating an ArrayList to store users using the data class user
+        val users: ArrayList<User> = getUserList()
         //creating our adapter
         val adapter = CustomAdapter(users)
-
-        //now adding the adapter to recyclerview
+        //Adding the adapter to RecyclerView
         recyclerView.adapter = adapter
+    }
 
+    /**
+     * User dummy data
+     */
+    private fun getUserList(): ArrayList<User> {
+        val users = ArrayList<User>()
+        //Adding some dummy data to the list
+        users.add(User("Belal Khan", "Ranchi Jharkhand"))
+        users.add(User("Ramiz Khan", "Ranchi Jharkhand"))
+        users.add(User("Faiz Khan", "Ranchi Jharkhand"))
+        users.add(User("Yashar Khan", "Ranchi Jharkhand"))
+        users.add(User("Belal Khan", "Ranchi Jharkhand"))
+        users.add(User("Ramiz Khan", "Ranchi Jharkhand"))
+        users.add(User("Faiz Khan", "Ranchi Jharkhand"))
+        users.add(User("Yashar Khan", "Ranchi Jharkhand"))
+        users.add(User("Belal Khan", "Ranchi Jharkhand"))
+        users.add(User("Ramiz Khan", "Ranchi Jharkhand"))
+        users.add(User("Faiz Khan", "Ranchi Jharkhand"))
+        users.add(User("Yashar Khan", "Ranchi Jharkhand"))
+        users.add(User("Belal Khan", "Ranchi Jharkhand"))
+        users.add(User("Ramiz Khan", "Ranchi Jharkhand"))
+        users.add(User("Faiz Khan", "Ranchi Jharkhand"))
+        users.add(User("Yashar Khan", "Ranchi Jharkhand"))
+
+        return users
     }
 }
