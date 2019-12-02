@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">EspressoTest</string>
+    <string name="label_login_title">Login Screen</string>
+    <string name="label_button_login">Login</string>
+    <string name="label_email_text">Email</string>
+    <string name="label_password_text">Password</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="error_login_failed">Your email or password was incorrect. Please try again.</string>
+    <string name="login_successfully">Login successfully.</string>
+</resources>
