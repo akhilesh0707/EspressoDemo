@@ -1,16 +1,14 @@
-package com.aqube.espressotest
+package com.aqube.espressotest.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_main.*
-import android.widget.TextView
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
+import com.aqube.espressotest.adapter.CustomAdapter
+import com.aqube.espressotest.R
+import com.aqube.espressotest.model.User
 
 
 class MainActivity : AppCompatActivity() {

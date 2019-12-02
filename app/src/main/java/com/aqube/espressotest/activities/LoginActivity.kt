@@ -1,4 +1,4 @@
-package com.aqube.espressotest
+package com.aqube.espressotest.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +9,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 import android.widget.Toast
 import android.util.Patterns
 import android.text.TextUtils
+import com.aqube.espressotest.R
 
 class LoginActivity : AppCompatActivity(), OnClickListener {
 
@@ -21,7 +22,7 @@ class LoginActivity : AppCompatActivity(), OnClickListener {
 
     override fun onClick(view: View?) {
         when (view?.id) {
-            R.id.buttonLogin-> {
+            R.id.buttonLogin -> {
                 login()
             }
         }
