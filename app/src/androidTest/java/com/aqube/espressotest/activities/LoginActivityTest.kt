@@ -1,4 +1,4 @@
-package com.aqube.espressotest
+package com.aqube.espressotest.activities
 
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.matcher.ViewMatchers.withId
@@ -20,14 +20,18 @@ import androidx.test.espresso.action.ViewActions.typeText
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import android.view.View
-import com.aqube.espressotest.activities.LoginActivity
+import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
+import com.aqube.espressotest.R
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.hamcrest.core.IsNot.not
+import org.junit.FixMethodOrder
+import org.junit.runners.MethodSorters
 
-@RunWith(AndroidJUnit4::class)
+@RunWith(AndroidJUnit4ClassRunner::class)
 @LargeTest
+@FixMethodOrder(MethodSorters.DEFAULT)
 class LoginActivityTest {
 
     @get:Rule
@@ -72,9 +76,10 @@ class LoginActivityTest {
         onView(withId(R.id.editTextPassword)).perform(typeText("123456"), closeSoftKeyboard())
         onView(withId(R.id.buttonLogin)).perform(click())
         onView(withText(getString(R.string.error_login_failed)))
-            .inRoot(withDecorView(not(activityRule.getActivity().getWindow().getDecorView())))
+            .inRoot(withDecorView(not(activityRule.activity.window.decorView)))
             .check(matches(isDisplayed()))
     }
+
     @Test
     fun loginSuccessfully_shouldShowWelcomeMessage() {
         onView(withId(R.id.editTextEmail)).perform(typeText("user@email.com"), closeSoftKeyboard())
