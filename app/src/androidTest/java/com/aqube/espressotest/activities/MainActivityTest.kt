@@ -13,6 +13,7 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
+import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.filters.LargeTest
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import androidx.test.rule.ActivityTestRule
@@ -36,7 +37,7 @@ class MainActivityTest {
 
     @Test
     fun testSampleRecyclerVisible() {
-        onView(ViewMatchers.withId(R.id.recyclerView))
+        onView(withId(R.id.recyclerView))
             .inRoot(
                 RootMatchers.withDecorView(Matchers.`is`(activityRule.activity.window.decorView))
             )
@@ -45,7 +46,7 @@ class MainActivityTest {
 
     @Test
     fun testCaseForRecyclerClick() {
-        onView(ViewMatchers.withId(R.id.recyclerView))
+        onView(withId(R.id.recyclerView))
             .inRoot(
                 RootMatchers.withDecorView(Matchers.`is`(activityRule.activity.window.decorView))
             )
@@ -59,7 +60,7 @@ class MainActivityTest {
         val itemCount = recyclerView.adapter!!.itemCount
 
         // Scroll to end of page with position
-        onView(ViewMatchers.withId(R.id.recyclerView))
+        onView(withId(R.id.recyclerView))
             .inRoot(
                 RootMatchers.withDecorView(Matchers.`is`(activityRule.activity.window.decorView))
             )
@@ -68,14 +69,14 @@ class MainActivityTest {
 
     @Test
     fun testCaseForRecyclerItemView() {
-        onView(ViewMatchers.withId(R.id.recyclerView))
+        onView(withId(R.id.recyclerView))
             .inRoot(
                 RootMatchers.withDecorView(Matchers.`is`(activityRule.activity.window.decorView))
             )
             .check(
                 matches(
                     withViewAtPosition(
-                        1, Matchers.allOf<View>(ViewMatchers.withId(R.id.textViewUsername), isDisplayed())
+                        1, Matchers.allOf<View>(withId(R.id.textViewUsername), isDisplayed())
                     )
                 )
             )
