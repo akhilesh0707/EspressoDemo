@@ -13,11 +13,9 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
-import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.filters.LargeTest
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import androidx.test.rule.ActivityTestRule
-import com.aqube.espressotest.R
 import com.aqube.espressotest.adapter.CustomAdapter
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
@@ -26,6 +24,12 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith
 import org.junit.runners.MethodSorters;
+import android.content.Intent
+import androidx.test.espresso.matcher.RootMatchers.withDecorView
+import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.platform.app.InstrumentationRegistry
+import com.aqube.espressotest.R
+
 
 @RunWith(AndroidJUnit4ClassRunner::class)
 @LargeTest
@@ -33,23 +37,27 @@ import org.junit.runners.MethodSorters;
 class MainActivityTest {
 
     @get:Rule
-    var activityRule: ActivityTestRule<MainActivity> = ActivityTestRule(MainActivity::class.java, true, true)
+    var activityRule: ActivityTestRule<MainActivity> =
+        object : ActivityTestRule<MainActivity>(MainActivity::class.java) {
+            override fun getActivityIntent(): Intent {
+                val targetContext = InstrumentationRegistry.getInstrumentation().targetContext
+                val result = Intent(targetContext, MainActivity::class.java)
+                result.putExtra("email", "user@gmail.com")
+                return result
+            }
+        }
 
     @Test
     fun testSampleRecyclerVisible() {
         onView(withId(R.id.recyclerView))
-            .inRoot(
-                RootMatchers.withDecorView(Matchers.`is`(activityRule.activity.window.decorView))
-            )
+            .inRoot(withDecorView(Matchers.`is`(activityRule.activity.window.decorView)))
             .check(matches(isDisplayed()))
     }
 
     @Test
     fun testCaseForRecyclerClick() {
         onView(withId(R.id.recyclerView))
-            .inRoot(
-                RootMatchers.withDecorView(Matchers.`is`(activityRule.activity.window.decorView))
-            )
+            .inRoot(withDecorView(Matchers.`is`(activityRule.activity.window.decorView)))
             .perform(RecyclerViewActions.actionOnItemAtPosition<CustomAdapter.ViewHolder>(0, click()))
     }
 
@@ -61,26 +69,10 @@ class MainActivityTest {
 
         // Scroll to end of page with position
         onView(withId(R.id.recyclerView))
-            .inRoot(
-                RootMatchers.withDecorView(Matchers.`is`(activityRule.activity.window.decorView))
-            )
+            .inRoot(withDecorView(Matchers.`is`(activityRule.activity.window.decorView)))
             .perform(RecyclerViewActions.scrollToPosition<CustomAdapter.ViewHolder>(itemCount - 1))
     }
 
-    @Test
-    fun testCaseForRecyclerItemView() {
-        onView(withId(R.id.recyclerView))
-            .inRoot(
-                RootMatchers.withDecorView(Matchers.`is`(activityRule.activity.window.decorView))
-            )
-            .check(
-                matches(
-                    withViewAtPosition(
-                        1, Matchers.allOf<View>(withId(R.id.textViewUsername), isDisplayed())
-                    )
-                )
-            )
-    }
 
     private fun withViewAtPosition(position: Int, itemMatcher: Matcher<View>): Matcher<View> {
         return object : BoundedMatcher<View, RecyclerView>(RecyclerView::class.java) {

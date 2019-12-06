@@ -39,42 +39,54 @@ class LoginActivityTest {
 
     @Test
     fun emailIsEmpty() {
+        //Given
         onView(withId(R.id.editTextEmail)).perform(clearText())
+        //When
         onView(withId(R.id.buttonLogin)).perform(click())
+        //Then
         onView(withId(R.id.editTextEmail)).check(matches(withError(getString(R.string.error_field_required))))
     }
 
     @Test
     fun passwordIsEmpty() {
+        //Given
         onView(withId(R.id.editTextEmail)).perform(typeText("email@email.com"), closeSoftKeyboard())
         onView(withId(R.id.editTextPassword)).perform(clearText())
+        //When
         onView(withId(R.id.buttonLogin)).perform(click())
+        //Then
         onView(withId(R.id.editTextPassword)).check(matches(withError(getString(R.string.error_field_required))))
     }
 
     @Test
     fun emailIsInvalid() {
+        //Given
         onView(withId(R.id.editTextEmail)).perform(typeText("invalid"), closeSoftKeyboard())
+        //When
         onView(withId(R.id.buttonLogin)).perform(click())
+        //Then
         onView(withId(R.id.editTextEmail)).check(matches(withError(getString(R.string.error_invalid_email))))
     }
 
     @Test
     fun passwordIsTooShort() {
+        //When
         onView(withId(R.id.editTextEmail)).perform(typeText("email@email.com"), closeSoftKeyboard())
         onView(withId(R.id.editTextPassword)).perform(typeText("1234"), closeSoftKeyboard())
+        //When
         onView(withId(R.id.buttonLogin)).perform(click())
+        //Then
         onView(withId(R.id.editTextPassword)).check(matches(withError(getString(R.string.error_invalid_password))))
     }
 
     @Test
     fun loginFailed() {
-        onView(withId(R.id.editTextEmail)).perform(
-            typeText("incorrect@email.com"),
-            closeSoftKeyboard()
-        )
+        //Given
+        onView(withId(R.id.editTextEmail)).perform(typeText("incorrect@email.com"), closeSoftKeyboard())
         onView(withId(R.id.editTextPassword)).perform(typeText("123456"), closeSoftKeyboard())
+        //When
         onView(withId(R.id.buttonLogin)).perform(click())
+        //Then
         onView(withText(getString(R.string.error_login_failed)))
             .inRoot(withDecorView(not(activityRule.activity.window.decorView)))
             .check(matches(isDisplayed()))
