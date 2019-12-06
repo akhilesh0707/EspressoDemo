@@ -81,7 +81,7 @@ class LoginActivityTest {
     }
 
     @Test
-    fun loginSuccessfully_shouldShowWelcomeMessage() {
+    fun loginSuccessfullyShouldShowWelcomeMessage() {
         onView(withId(R.id.editTextEmail)).perform(typeText("user@email.com"), closeSoftKeyboard())
         onView(withId(R.id.editTextPassword)).perform(typeText("123456"), closeSoftKeyboard())
         onView(withId(R.id.buttonLogin)).perform(click())
@@ -89,7 +89,7 @@ class LoginActivityTest {
     }
 
     @Test
-    fun loginSuccessfully_shouldShowToast() {
+    fun loginSuccessfullyShouldShowToast() {
         onView(withId(R.id.editTextEmail)).perform(typeText("user@email.com"), closeSoftKeyboard())
         onView(withId(R.id.editTextPassword)).perform(typeText("123456"), closeSoftKeyboard())
         onView(withId(R.id.buttonLogin)).perform(click())

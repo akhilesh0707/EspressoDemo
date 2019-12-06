@@ -1,6 +1,7 @@
 package com.aqube.espressotest
 
 import androidx.test.InstrumentationRegistry
+import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import androidx.test.runner.AndroidJUnit4
 
 import org.junit.Test
@@ -13,7 +14,7 @@ import org.junit.Assert.*
  *
  * See [testing documentation](http://d.android.com/tools/testing).
  */
-@RunWith(AndroidJUnit4::class)
+@RunWith(AndroidJUnit4ClassRunner::class)
 class ExampleInstrumentedTest {
     @Test
     fun useAppContext() {
